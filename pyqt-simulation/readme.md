@@ -22,23 +22,25 @@ This simulation is a framework for simulating population growth and gene trackin
 * World itself built out of a `QFrame` widget. Just about everything happens within here.
 * Methods:
     * `start` - Starts the timer of the world.
-    * `addThing`
-    * `delThing`
-    * `advanceTime`
-    * `drawThing`
-    * `paintEvent`
-    * `timerEvent`
-    * `emptyLocation`
+    * `addThing` - Adds a creature to the world.
+    * `delThing` - Removes a creature from the world.
+    * `advanceTime` - Advances the age of the world by one increment.
+    * `drawThing` - Draws creature at its current location.
+    * `paintEvent` - Draws all creatures in the world.
+    * `timerEvent` - Loop that runs the `advanceTime` method and ages world.
+    * `emptyLocation` - Checks to see if location is empty.
 
 ### Creatures
 * File contains the varying classes of creatures contained within the world.
 * Methods
-    * 
+    * `tryToMove` - Looks around creature for empty location to move to.
+    * `tryToBreed` - Looks around creature for empty location to create new creature.
+    * `liveALittle` - Method uses variables like `maxAge` and `speed` to have creature live and interact in its own unique way.
     
 ### Run
 * File containing code to actually run simulation.
 * Methods:
-    *
+    * None
 
 # Notes
 

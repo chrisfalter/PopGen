@@ -2,9 +2,10 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import * 
 import random
+from abc import ABC,abstractmethod
 
 # Class for anything that moves around.
-class MovingObject:
+class MovingObject(ABC):
     def __init__(self, maxAge, speed):
         self.world = None
         self.dead = False
@@ -48,6 +49,10 @@ class MovingObject:
 
         if self.world.emptyLocation(nextX, nextY):
             baby = self.world.addThing(thing, nextX, nextY)
+
+    @abstractmethod
+    def liveALittle(self):
+        return
 
 # Red
 class RedDot(MovingObject):
