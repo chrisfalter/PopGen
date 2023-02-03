@@ -17,7 +17,10 @@ class World(QFrame):
         self.maxX = maxX
         self.maxY = maxY
         self.grid = []
+
         self.terrainGrid = [] # Unused right now.
+        self.terrainList = []
+
         self.thingList = []
         self.worldSpeed = worldSpeed # Milliseconds per frame.
         self.maxWorldAge = maxWorldAge
@@ -36,6 +39,7 @@ class World(QFrame):
             self.terrainGrid.append(row)
 
         print("Size of grid:", len(self.grid))
+        #print(self.terrainGrid)
 
     def start(self):
         # Starting message and the clock
@@ -84,11 +88,18 @@ class World(QFrame):
         painter.setPen(QPen(thing.color, 5, Qt.SolidLine))
         painter.drawEllipse(int(thing.xPos), int(thing.yPos), 5, 5)
 
+    def drawTerrain(self, painter, terrain):
+        painter.setPen(QPen(QColor(0, 0, 255), 5, Qt.SolidLine))
+        painter.setBrush(QBrush(Qt.blue, Qt.DiagCrossPattern))
+        painter.drawRect(terrain[0], terrain[1], terrain[0], terrain[1])
+
     # Draw everything for each frame.
     def paintEvent(self, event):
         painter = QPainter(self)
         for thing in self.thingList:
             self.drawThing(painter, thing)
+        for terrain in self.terrainList:
+            self.drawTerrain(painter, terrain)
 
     def timerEvent(self, event):
         if event.timerId() == self.timer.timerId():
@@ -105,4 +116,4 @@ class World(QFrame):
                 return False
         except IndexError:
             print("IndexError occured.")
-            return False    
+            return False

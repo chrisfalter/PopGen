@@ -20,6 +20,8 @@ if __name__ == '__main__':
     window = win.Window(maxWorldAge, maxX, maxY, width, height, worldSpeed)
     theWorld = window.world
 
+    theWorld.terrainList.append([200, 200])
+
     for i in range(numReds):
         newDot = c.RedDot(50, 10)
         x = random.randrange(theWorld.maxX)
