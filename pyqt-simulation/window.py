@@ -14,7 +14,7 @@ class Window(QMainWindow):
   
         # calling showMessage method when signal received by World
         self.world.msg2statusbar[str].connect(self.statusbar.showMessage)
-  
+
         self.setCentralWidget(self.world)
   
         self.setWindowTitle('Simulation')

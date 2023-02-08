@@ -15,15 +15,16 @@ if __name__ == '__main__':
     width = 800
     height = 600
     numReds = 1
-    numBlues = 20
-    worldSpeed = 200
+    numBlues = 100
+    maxCreatureAge = 2000
+    worldSpeed = 10
     window = win.Window(maxWorldAge, maxX, maxY, width, height, worldSpeed)
     theWorld = window.world
 
     theWorld.terrainList.append([200, 200])
 
     for i in range(numReds):
-        newDot = c.RedDot(50, 10)
+        newDot = c.RedDot(maxCreatureAge, 10)
         x = random.randrange(theWorld.maxX)
         y = random.randrange(theWorld.maxY)
         while not theWorld.emptyLocation(x, y):
@@ -32,7 +33,7 @@ if __name__ == '__main__':
         theWorld.addThing(newDot, x, y)
 
     for i in range(numBlues):
-        newDot = c.BlueDot(50, 10)
+        newDot = c.BlueDot(maxCreatureAge, 10)
         x = random.randrange(theWorld.maxX)
         y = random.randrange(theWorld.maxY)
         while not theWorld.emptyLocation(x, y):

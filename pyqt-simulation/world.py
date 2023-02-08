@@ -2,6 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import random
+import creatures as c
 
 class World(QFrame):
 
@@ -9,7 +10,7 @@ class World(QFrame):
 
     def __init__(self, maxWorldAge, maxX, maxY, worldSpeed):
         super(World, self).__init__()
-    
+
         self.timer = QBasicTimer()
         self.setStyleSheet("background-image: url('PopGen/pyqt-simulation/background.png')")
         self.setFocusPolicy(Qt.StrongFocus)
@@ -115,5 +116,15 @@ class World(QFrame):
             else:
                 return False
         except IndexError:
-            print("IndexError occured.")
+            #print("IndexError occured.")
+            return False
+
+    def checkLocation(self, x, y):
+        try:
+            if not self.emptyLocation(x, y):
+                return self.grid[y][x]
+            else:
+                return None
+        except IndexError:
+            #print("IndexError occured.")
             return False
