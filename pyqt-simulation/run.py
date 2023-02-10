@@ -5,6 +5,7 @@ import random
 import sys
 import window as win
 import creatures as c
+import terrain as t
 
 # Run
 if __name__ == '__main__':
@@ -12,16 +13,18 @@ if __name__ == '__main__':
     maxWorldAge = 128319877
     maxX = 800
     maxY = 600
-    width = 800
-    height = 600
+    width = maxX + 20
+    height = maxY + 20
     numReds = 1
-    numBlues = 100
+    numBlues = 1
     maxCreatureAge = 2000
-    worldSpeed = 10
+    worldSpeed = 100
     window = win.Window(maxWorldAge, maxX, maxY, width, height, worldSpeed)
     theWorld = window.world
 
-    theWorld.terrainList.append([200, 200])
+    theWorld.addTerrain(t.Water(20, 20, 100))
+    theWorld.addTerrain(t.Water(100, 100, 300))
+    theWorld.addTerrain(t.Mountains(30, 30, 200))
 
     for i in range(numReds):
         newDot = c.RedDot(maxCreatureAge, 10)
@@ -40,5 +43,7 @@ if __name__ == '__main__':
             x = random.randrange(theWorld.maxX)
             y = random.randrange(theWorld.maxY)
         theWorld.addThing(newDot, x, y)
+
+    theWorld.visualizeTerrain()
 
     sys.exit(app.exec_())

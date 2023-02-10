@@ -2,7 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import * 
 import random
-from abc import ABC,abstractmethod
+from abc import ABC, abstractmethod
 
 # Class for anything that moves around.
 class MovingObject(ABC):

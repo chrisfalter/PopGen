@@ -58,6 +58,16 @@ class World(QFrame):
             return thing
         else:
             print("Looks like there was something already there.")
+
+    def addTerrain(self, terrain):
+        self.terrainList.append(terrain)
+        for y in range(terrain.y - 1, terrain.y + terrain.h - 1):
+            for x in range(terrain.x - 1, terrain.x + terrain.w - 1):
+                self.terrainGrid[y][x] = terrain.type
+
+    def visualizeTerrain(self):
+        for row in self.terrainGrid:
+            print(row)
     
     def delThing(self, thing):
         self.grid[thing.yPos][thing.xPos] = None
@@ -90,9 +100,9 @@ class World(QFrame):
         painter.drawEllipse(int(thing.xPos), int(thing.yPos), 5, 5)
 
     def drawTerrain(self, painter, terrain):
-        painter.setPen(QPen(QColor(0, 0, 255), 5, Qt.SolidLine))
-        painter.setBrush(QBrush(Qt.blue, Qt.DiagCrossPattern))
-        painter.drawRect(terrain[0], terrain[1], terrain[0], terrain[1])
+        painter.setPen(QPen(terrain.color, 5, Qt.SolidLine))
+        painter.setBrush(QBrush(terrain.color, Qt.DiagCrossPattern))
+        painter.drawRect(terrain.x, terrain.y, terrain.h, terrain.w)
 
     # Draw everything for each frame.
     def paintEvent(self, event):
