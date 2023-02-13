@@ -16,15 +16,15 @@ if __name__ == '__main__':
     width = maxX + 20
     height = maxY + 20
     numReds = 1
-    numBlues = 1
-    maxCreatureAge = 2000
-    worldSpeed = 100
+    numBlues = 50
+    maxCreatureAge = 100
+    worldSpeed = 5
     window = win.Window(maxWorldAge, maxX, maxY, width, height, worldSpeed)
     theWorld = window.world
 
     theWorld.addTerrain(t.Water(20, 20, 100))
-    theWorld.addTerrain(t.Water(100, 100, 300))
-    theWorld.addTerrain(t.Mountains(30, 30, 200))
+    theWorld.addTerrain(t.Water(100, 200, 300))
+    theWorld.addTerrain(t.Mountains(450, 30, 200))
 
     for i in range(numReds):
         newDot = c.RedDot(maxCreatureAge, 10)
@@ -44,6 +44,6 @@ if __name__ == '__main__':
             y = random.randrange(theWorld.maxY)
         theWorld.addThing(newDot, x, y)
 
-    theWorld.visualizeTerrain()
+    #theWorld.visualizeTerrain()
 
     sys.exit(app.exec_())

@@ -57,6 +57,7 @@ class MovingObject(ABC):
 
         if self.world.emptyLocation(nextX, nextY):
             self.world.addThing(baby, nextX, nextY)
+            self.babies += 1
             return True
         return False
 
@@ -64,9 +65,15 @@ class MovingObject(ABC):
     def findMate(self, baby):
         return
 
-    @abstractmethod
+    #@abstractmethod
     def liveALittle(self):
-        return
+        if self.babies < 1:
+            self.tryToMove()
+            self.findMate()
+            self.age += 1
+        else:
+            self.dead = True
+    
 
 # Red
 class RedDot(MovingObject):
@@ -92,7 +99,7 @@ class RedDot(MovingObject):
 
         if mateFound == "blue":
             baby = nextGenDot(self.maxAge, self.speed)
-            baby.geneLvl += 10
+            baby.geneLvl += 25
             self.birth(baby)
             return True
         if mateFound == "red":
@@ -101,21 +108,11 @@ class RedDot(MovingObject):
             return True
         if mateFound == "nextGen":
             baby = nextGenDot(self.maxAge, self.speed)
-            baby.geneLvl += thingThere.geneLvl + 10
+            baby.geneLvl += thingThere.geneLvl + 25
             self.birth(baby)
             return True
     
         return False
-
-    def liveALittle(self):
-        if self.babies < 1:
-            self.tryToMove()
-            bred = self.findMate()
-            if bred:
-                self.babies += 1
-            self.age += 1
-        else:
-            self.dead = True
 
 # Blue
 class BlueDot(MovingObject):
@@ -151,16 +148,6 @@ class BlueDot(MovingObject):
 
         return False
 
-    def liveALittle(self):
-        if self.babies < 1:
-            self.tryToMove()
-            bred = self.findMate()
-            if bred:
-                self.babies += 1
-            self.age += 1
-        else:
-            self.dead = True
-
 
 class nextGenDot(MovingObject):
     def __init__(self, maxAge, speed):
@@ -185,29 +172,19 @@ class nextGenDot(MovingObject):
 
         if mateFound == "blue":
             baby = nextGenDot(self.maxAge, self.speed)
-            baby.geneLvl += 10
+            baby.geneLvl += 25
             self.birth(baby)
             return True
         if mateFound == "red":
             baby = nextGenDot(self.maxAge, self.speed)
-            baby.geneLvl += self.geneLvl + 10
+            baby.geneLvl += self.geneLvl + 25
             self.birth(baby)
             return True
         if mateFound == "nextGen":
             baby = nextGenDot(self.maxAge, self.speed)
             #baby.geneLvl = int((thingThere.geneLvl + self.geneLvl) / 2)
-            baby.geneLvl += thingThere.geneLvl + 10
+            baby.geneLvl += thingThere.geneLvl + 25
             self.birth(baby)
             return True
 
         return False
-
-    def liveALittle(self):
-        if self.babies < 1:
-            self.tryToMove()
-            bred = self.findMate()
-            if bred:
-                self.babies += 1
-            self.age += 1
-        else:
-            self.dead = True
